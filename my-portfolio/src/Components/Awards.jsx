@@ -50,7 +50,7 @@ const Awards = () => {
       year: "2023",
       description: "Awarded a Certificate of Appreciation for independently leading the VLL Platform deployment in a new cloud environment for the Enterprise Metaverse project, demonstrating exceptional dedication and technical expertise.",
       category: "professional",
-      image: "/src/assets/awards/Phani_INSTA_AWARDS.png"
+      image: "../assets/awards/Phani_INSTA_AWARDS.png"
     },
     {
       title: "Outstanding Performance",
