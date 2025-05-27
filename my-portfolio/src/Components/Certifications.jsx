@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 const Certifications = () => {
   const [selectedCert, setSelectedCert] = useState(null);
@@ -12,8 +12,7 @@ const Certifications = () => {
       issuer: "Internshaala",
       date: "2024",
       credentials: "ey6gk6107hb36tgw",
-      skills: ["React", "JavaScript", "Tailwind CSS"],
-      image: "src/assets/certs/ReactJS_NSDC.png",
+      skills: ["React", "JavaScript", "Tailwind CSS"],      image: "/src/assets/certs/ReactJS_NSDC.png",
       level: "Basic - Advanced"
     },
     {
@@ -22,7 +21,7 @@ const Certifications = () => {
       date: "2024",
       credentials: "INFOSYS-REACT-2024",
       skills: ["React", "Routers", "React Hooks"],
-      image: "src/assets/certs/Infosys_React.png",
+      image: "/src/assets/certs/Infosys_React.png",
       level: "Basic - Advanced"
     },
     {
@@ -31,14 +30,16 @@ const Certifications = () => {
       date: "2024",
       credentials: "INFOSYS-JS-2024",
       skills: ["JavaScript", "ES6", "DOM Manipulation"],
-      image: "src/assets/certs/Infosys_JavaScript.png",
+      image: "/src/assets/certs/Infosys_JavaScript.png",
       level: "Expert"
     }
   ];
 
+  // Update the useEffect for loading animation
   useEffect(() => {
+    let timer;
     if (selectedCert && unlockProgress < 100) {
-      const timer = setInterval(() => {
+      timer = setInterval(() => {
         setUnlockProgress(prev => {
           if (prev >= 100) {
             clearInterval(timer);
@@ -48,17 +49,31 @@ const Certifications = () => {
           return prev + 2;
         });
       }, 50);
-      return () => clearInterval(timer);
     }
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [selectedCert, unlockProgress]);
+
+  useEffect(() => {
+    if (selectedCert) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
   }, [selectedCert]);
 
-  const handleCertClick = (cert) => {
+  const handleCertClick = useCallback((cert) => {
     setSelectedCert(cert);
     setUnlockProgress(0);
     setShowImage(false);
     setUnlockedCerts(prev => new Set([...prev, cert.name]));
-  };
+  }, []);
 
+  // Reset showImage when modal is closed
   const handleCloseModal = () => {
     setSelectedCert(null);
     setUnlockProgress(0);
@@ -157,9 +172,16 @@ const Certifications = () => {
         </div>
 
         {selectedCert && (
-          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 achievement-modal">
-            <div className="relative bg-gray-900 rounded-lg max-w-3xl w-full border border-green-400 achievement-showcase">
-              <div className="terminal-header">
+          <div 
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 achievement-modal" 
+            onClick={handleCloseModal}
+            style={{ 
+              top: `${window.scrollY}px`, 
+              height: `${window.innerHeight}px` 
+            }}
+          >
+            <div className="relative bg-gray-900 rounded-lg max-w-3xl w-full border border-green-400 achievement-showcase" onClick={e => e.stopPropagation()}>
+              <div className="terminal-header sticky top-0 z-10 bg-gray-900">
                 <div className="terminal-button red" onClick={handleCloseModal}></div>
                 <div className="terminal-button yellow"></div>
                 <div className="terminal-button green"></div>
@@ -168,13 +190,13 @@ const Certifications = () => {
               
               <div className="p-6">
                 <div className="mb-4 flex items-center justify-center">
-                  <span className="text-4xl mr-4 achievement-icon">{getLevelIcon(selectedCert.level)}</span>
+                  <span className="text-4xl mr-4 achievement-icon animate-bounce">{getLevelIcon(selectedCert.level)}</span>
                   <h3 className="text-2xl font-semibold text-green-400 glow-text">{selectedCert.name}</h3>
                 </div>
 
                 {!showImage ? (
                   <div className="text-center space-y-6 p-8">
-                    <h4 className="text-xl text-green-400 font-mono mb-8">
+                    <h4 className="text-xl text-green-400 font-mono mb-8 typing-text">
                       {unlockProgress < 100 ? 'Decrypting Certificate...' : 'Decryption Complete!'}
                     </h4>
                     <div className="w-full bg-gray-800 rounded-full h-4 relative overflow-hidden border border-green-500/30">
@@ -183,6 +205,13 @@ const Certifications = () => {
                         style={{
                           width: `${unlockProgress}%`,
                           background: 'linear-gradient(90deg, #059669, #10B981)'
+                        }}
+                        onTransitionEnd={() => {
+                          if (unlockProgress >= 100) {
+                            setTimeout(() => {
+                              setShowImage(true);
+                            }, 500);
+                          }
                         }}
                       >
                         <div 
@@ -215,7 +244,7 @@ const Certifications = () => {
                   </div>
                 ) : (
                   <div className="certificate-container flex flex-col items-center justify-center">
-                    <div className="relative w-3/4 mx-auto">
+                    <div className="relative w-1/2 mx-auto">
                       <div className="absolute inset-0 bg-green-400/20 blur-xl animate-pulse"></div>
                       <img
                         src={selectedCert.image}
@@ -229,7 +258,7 @@ const Certifications = () => {
                     </div>
                     
                     <div className="mt-8 w-full grid grid-cols-2 gap-6">
-                      <div className="achievement-card p-4 border border-green-400/50 rounded-lg bg-black/30">
+                      <div className="achievement-card p-4 border border-green-400/50 rounded-lg bg-black/30 hover:bg-black/50 transition-colors">
                         <h4 className="text-purple-400 mb-3">Skills Unlocked:</h4>
                         <div className="flex flex-wrap gap-2">
                           {selectedCert.skills.map((skill, index) => (
@@ -243,7 +272,7 @@ const Certifications = () => {
                           ))}
                         </div>
                       </div>
-                      <div className="achievement-card p-4 border border-green-400/50 rounded-lg bg-black/30">
+                      <div className="achievement-card p-4 border border-green-400/50 rounded-lg bg-black/30 hover:bg-black/50 transition-colors">
                         <h4 className="text-purple-400 mb-3">Achievement Details:</h4>
                         <p className="text-gray-300 mb-2">Level: {selectedCert.level}</p>
                         <p className="text-gray-300 mb-2">Issued: {selectedCert.date}</p>

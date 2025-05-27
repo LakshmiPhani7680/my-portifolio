@@ -7,6 +7,18 @@ const Experience = () => {
 
   const experiences = [
     {
+      role: "Python Developer",
+      company: "Exponential AI",
+      duration: "2025 Feb - Present",
+      location: "hyderabad-india",
+      responsibilities:[],
+      tech: [
+        "python",
+        "numpy",
+        "pandas"
+      ]
+    },
+    {
       role: "Senior Systems Engineer",
       company: "Infosys",
       duration: "2024 Jan - 2025 Feb",
@@ -36,6 +48,7 @@ const Experience = () => {
         "amazon-web-services"
       ]
     },
+
     {
       role: "Systems Engineer",
       company: "Infosys",
