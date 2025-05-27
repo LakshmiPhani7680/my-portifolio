@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import ResumeViewer from './ResumeViewer';
 
-const Navigation = () => {
-  const [isPaletteOpen, setIsPaletteOpen] = useState(false);
+const Navigation = () => {  const [isPaletteOpen, setIsPaletteOpen] = useState(false);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [searchQuery, setSearchQuery] = useState('');
@@ -161,11 +160,15 @@ const Navigation = () => {
     item.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
   const handleClick = (id) => {
+    setIsPaletteOpen(false);
+    
     if (id === 'resume') {
+      // Update scroll position before opening resume
+      const scrollPosition = window.scrollY;
       setIsResumeOpen(true);
-      setIsPaletteOpen(false);
+      // Maintain scroll position
+      window.scrollTo(0, scrollPosition);
       return;
     }
     

@@ -550,41 +550,171 @@ h1, h2, h3, h4, h5, h6 {
   animation: scale-up 0.5s ease-out forwards;
 }
 
-.loading-dots {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
+/* Matrix decryption animations */
+.glow-text {
+  text-shadow: 0 0 10px var(--primary);
+  animation: glow 1.5s ease-in-out infinite alternate;
 }
 
-.loading-dots .dot {
+.loading-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
   width: 8px;
   height: 8px;
-  background-color: #10B981;
+  background: var(--primary);
   border-radius: 50%;
   animation: dot-pulse 1.5s infinite;
 }
 
-.loading-dots .dot:nth-child(2) {
+.dot:nth-child(2) {
   animation-delay: 0.2s;
 }
 
-.loading-dots .dot:nth-child(3) {
+.dot:nth-child(3) {
   animation-delay: 0.4s;
 }
 
 @keyframes dot-pulse {
-  0%, 100% { transform: scale(0.8); opacity: 0.5; }
-  50% { transform: scale(1.2); opacity: 1; }
-}
-
-.glow-text {
-  text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
-  animation: glow 2s infinite;
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.5); opacity: 0.5; }
 }
 
 @keyframes glow {
-  0%, 100% { text-shadow: 0 0 10px rgba(16, 185, 129, 0.5); }
-  50% { text-shadow: 0 0 20px rgba(16, 185, 129, 0.8); }
+  from { text-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary); }
+  to { text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary); }
+}
+
+@keyframes shine {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+.animate-scale-up {
+  animation: scale-up 0.3s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+@keyframes scale-up {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Add after existing styles */
+.section-container {
+  @apply rounded-lg p-6 mb-12 backdrop-blur-md bg-opacity-10 bg-black border border-green-400/20 shadow-lg transform transition-all duration-300;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 25, 47, 0.7) 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}
+
+.section-container:hover {
+  @apply border-green-400/40 shadow-green-400/20;
+  transform: translateY(-2px);
+  background: linear-gradient(
+    135deg,
+    rgba(10, 25, 47, 0.8) 0%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+}
+
+/* Enhanced matrix background animation */
+.matrix-bg {
+  background: linear-gradient(
+    45deg,
+    rgba(0, 255, 0, 0.05) 25%,
+    transparent 25%,
+    transparent 75%,
+    rgba(0, 255, 0, 0.05) 75%,
+    rgba(0, 255, 0, 0.05)
+  );
+  background-size: 60px 60px;
+  animation: matrix-shift 20s linear infinite;
+}
+
+@keyframes matrix-shift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 60px 60px;
+  }
+}
+
+/* Glowing text effect for headings */
+.glow-on-hover {
+  transition: text-shadow 0.3s ease;
+}
+
+.glow-on-hover:hover {
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.5),
+               0 0 20px rgba(0, 255, 0, 0.3),
+               0 0 30px rgba(0, 255, 0, 0.1);
+}
+
+/* Enhance scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(10, 25, 47, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 0, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 0, 0.5);
+}
+
+/* New glassmorphism styles */
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.glassmorphism:hover {
+  box-shadow: 0 8px 60px rgba(0, 255, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Specific component overrides */
+.card {
+  @apply rounded-lg overflow-hidden shadow-md transition-transform duration-300;
+}
+
+.card:hover {
+  @apply transform -translate-y-1;
+}
+
+.button {
+  @apply inline-flex items-center justify-center rounded-md px-4 py-2 font-semibold text-white transition-all duration-300;
+  background: linear-gradient(135deg, #00ff00, #00cc00);
+  box-shadow: 0 4px 15px rgba(0, 255, 0, 0.3);
+}
+
+.button:hover {
+  @apply scale-105;
+  box-shadow: 0 8px 30px rgba(0, 255, 0, 0.4);
 }
 
 /* Keep existing styles after this... */

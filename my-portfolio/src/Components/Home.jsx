@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import resumePdf from '../assets/pdfs/Resume_Putrevu_Phani.pdf';
+import ResumeViewer from './ResumeViewer';
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showCommands, setShowCommands] = useState(false);
   const [showResume, setShowResume] = useState(false);
-  const [resumeLoading, setResumeLoading] = useState(0);
-  const [isDecrypted, setIsDecrypted] = useState(false);
+  const [isResumeButtonLoading, setIsResumeButtonLoading] = useState(false);
 
   const commands = [
-    { icon: '🎮', text: 'Interactive Portfolio Loaded' },
-    { icon: '🔧', text: 'Developer Tools Initialized' },
-    { icon: '🚀', text: 'Skills Matrix Activated' },
-    { icon: '✨', text: 'Achievement System Online' }
+    { icon: '🎯', text: 'Initializing Development Environment' },
+    { icon: '⚡', text: 'Loading Technical Expertise' },
+    { icon: '🚀', text: 'Preparing Project Showcase' },
+    { icon: '✨', text: 'Activating Professional Journey' }
   ];
+
+  const skills = ['ReactJS Developer', 'Node.js Developer', 'JavaScript Developer', 'Python Developer', 'Full Stack Developer'];
+  const [currentSkillIndex, setCurrentSkillIndex] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -23,38 +25,43 @@ const Home = () => {
 
     return () => clearTimeout(timer);
   }, []);
-
   useEffect(() => {
-    if (showResume && resumeLoading < 100) {
-      const interval = setInterval(() => {
-        setResumeLoading(prev => {
-          if (prev >= 100) {
-            clearInterval(interval);
-            return 100;
-          }
-          return prev + 2;
-        });
-      }, 50);
-
-      return () => clearInterval(interval);
+    if (showResume) {
+      setIsResumeButtonLoading(true);
+      setTimeout(() => {
+        setIsResumeButtonLoading(false);
+      }, 500);
     }
   }, [showResume]);
 
   useEffect(() => {
-    if (resumeLoading === 100) {
-      setTimeout(() => setIsDecrypted(true), 500);
-    }
-  }, [resumeLoading]);
+    const skillInterval = setInterval(() => {
+      setCurrentSkillIndex((prev) => (prev + 1) % skills.length);
+    }, 2000);
+
+    return () => clearInterval(skillInterval);
+  }, []);
+  const handleResumeClick = () => {
+    setIsResumeButtonLoading(true);
+    // Add a small delay before showing the resume to ensure loading animation is visible
+    setTimeout(() => {
+      setShowResume(true);
+      // Keep the button in loading state for a moment after opening
+      setTimeout(() => setIsResumeButtonLoading(false), 500);
+    }, 300);
+  };
 
   return (
-    <section className="min-h-screen flex items-center justify-center matrix-bg py-16">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="terminal-window home-terminal">
+    <section className="min-h-screen flex items-center justify-center matrix-bg py-16 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black opacity-90"></div>
+      
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="terminal-window home-terminal backdrop-blur-lg bg-black/70">
           <div className="terminal-header">
             <div className="terminal-button red"></div>
             <div className="terminal-button yellow"></div>
             <div className="terminal-button green"></div>
-            <span className="ml-4 text-green-400 text-sm">Portfolio.exe</span>
+            <span className="ml-4 text-green-400 text-sm font-mono">portfolio@phani:~$</span>
           </div>
           
           <div className="p-8 space-y-6">
@@ -75,17 +82,21 @@ const Home = () => {
               </div>
             ) : (
               <>
-                <div className="code-block mb-8 welcome-block">
+                <div className="code-block mb-8 welcome-block bg-gray-900/50 p-6 rounded-lg border border-green-500/20">
+                  <div className="flex items-center mb-4">
+                    <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse mr-2"></div>
+                    <span className="text-green-400 font-mono">system.status: active</span>
+                  </div>
                   <span className="text-green-400">const</span>{" "}
                   <span className="text-yellow-400">developer</span> = {"{"}
-                  <div className="pl-4 space-y-2">
+                  <div className="pl-6 space-y-3">
                     <div className="reveal-text" style={{ animationDelay: '0.5s' }}>
                       <span className="text-purple-400">name</span>:{" "}
                       <span className="text-green-300">'Phani Putrevu'</span>,
                     </div>
                     <div className="reveal-text" style={{ animationDelay: '1s' }}>
                       <span className="text-purple-400">role</span>:{" "}
-                      <span className="text-green-300">'Full Stack Developer'</span>,
+                      <span className="text-green-300 typewriter">'{skills[currentSkillIndex]}'</span>,
                     </div>
                     <div className="reveal-text" style={{ animationDelay: '1.5s' }}>
                       <span className="text-purple-400">location</span>:{" "}
@@ -93,162 +104,124 @@ const Home = () => {
                     </div>
                     <div className="reveal-text" style={{ animationDelay: '2s' }}>
                       <span className="text-purple-400">status</span>:{" "}
-                      <span className="text-green-300">'Ready for new challenges'</span>
+                      <span className="text-green-300">'Available for opportunities'</span>
                     </div>
                   </div>
                   {"}"};
                 </div>
 
-                <h1 className="typing-text text-4xl md:text-6xl font-bold mb-6 glow-text">
-                  Hello, World! <span className="wave-emoji">👋</span>
-                </h1>
+                <div className="welcome-message space-y-6 bg-gray-900/30 p-6 rounded-lg backdrop-blur-sm">
+                  <h1 className="typing-text text-4xl md:text-6xl font-bold mb-6 glow-text flex items-center gap-4">
+                    Hello, World! <span className="wave-emoji animate-wave">👋</span>
+                  </h1>
 
-                <p className="text-lg md:text-xl mb-8 text-gray-300 reveal-text" style={{ animationDelay: '2.5s' }}>
-                  <span className="text-green-400">{'>'}</span>
-                  Welcome to my digital playground. I craft elegant solutions to complex problems.
-                </p>
+                  <p className="text-lg md:text-xl mb-8 text-gray-300 reveal-text leading-relaxed" style={{ animationDelay: '2.5s' }}>
+                    <span className="text-green-400">{">"}</span> Welcome to my digital portfolio. I specialize in crafting innovative solutions through code, turning complex challenges into elegant applications.
+                  </p>
 
-                <div className="flex gap-4 button-container reveal-text" style={{ animationDelay: '3s' }}>
-                  <button 
-                    onClick={() => setShowResume(true)}
-                    className="code-button with-icon"
-                  >
-                    <span className="button-icon">📄</span>
-                    {"<Resume />"}
-                  </button>
-                  <a 
-                    href="#contact" 
-                    className="code-button with-icon"
-                  >
-                    <span className="button-icon">💌</span>
-                    {"<Contact />"}
-                  </a>
-                  <a 
-                    href="#projects" 
-                    className="code-button with-icon"
-                  >
-                    <span className="button-icon">🎯</span>
-                    {"<Projects />"}
-                  </a>
-                  <a 
-                    href="#skills" 
-                    className="code-button with-icon"
-                  >
-                    <span className="button-icon">⚡</span>
-                    {"<Skills />"}
-                  </a>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 button-container reveal-text" style={{ animationDelay: '3s' }}>
+                    <button 
+                      onClick={handleResumeClick}
+                      disabled={isResumeButtonLoading}
+                      className={`code-button with-icon group relative overflow-hidden ${
+                        isResumeButtonLoading ? 'button-loading cursor-wait' : 'hover:scale-105'
+                      } transition-all duration-300`}
+                    >
+                      <div className={`flex items-center justify-center gap-2 transition-all duration-300 ${
+                        isResumeButtonLoading ? 'opacity-0' : 'opacity-100'
+                      }`}>
+                        <span className="button-icon group-hover:rotate-12 transition-transform">📄</span>
+                        <span className="relative">
+                          {"<Resume />"}
+                          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-400 group-hover:w-full transition-all duration-300"></span>
+                        </span>
+                      </div>
+
+                      {isResumeButtonLoading && (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="loading-grid">
+                            {Array.from({ length: 9 }).map((_, i) => (
+                              <div key={i} className="loading-cell" />
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </button>
+                    <a 
+                      href="#contact" 
+                      className="code-button with-icon group hover:scale-105 transition-all duration-300"
+                    >
+                      <span className="button-icon group-hover:rotate-12 transition-transform">💌</span>
+                      <span className="relative">
+                        {"<Contact />"}
+                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-400 group-hover:w-full transition-all duration-300"></span>
+                      </span>
+                    </a>
+                    <a 
+                      href="#projects" 
+                      className="code-button with-icon group hover:scale-105 transition-all duration-300"
+                    >
+                      <span className="button-icon group-hover:rotate-12 transition-transform">🎯</span>
+                      <span className="relative">
+                        {"<Projects />"}
+                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-400 group-hover:w-full transition-all duration-300"></span>
+                      </span>
+                    </a>
+                    <a 
+                      href="#skills" 
+                      className="code-button with-icon group hover:scale-105 transition-all duration-300"
+                    >
+                      <span className="button-icon group-hover:rotate-12 transition-transform">⚡</span>
+                      <span className="relative">
+                        {"<Skills />"}
+                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-400 group-hover:w-full transition-all duration-300"></span>
+                      </span>
+                    </a>
+                  </div>
                 </div>
 
-                <div className="mt-12 commands-list">
+                <div className="mt-12 commands-list bg-black/40 p-4 rounded-lg backdrop-blur-sm">
+                  <div className="text-sm text-green-400 mb-2 font-mono">System Initialization Complete:</div>
                   {showCommands && commands.map((cmd, index) => (
                     <div 
                       key={index}
-                      className="text-sm text-gray-400 command-item"
+                      className="text-sm text-gray-400 command-item flex items-center gap-2 py-1"
                       style={{ animationDelay: `${3.5 + index * 0.2}s` }}
                     >
-                      <span className="text-green-400">{'>'}</span>
-                      {cmd.icon} {cmd.text}
-                      <span className="text-green-400"> ✓</span>
+                      <span className="text-green-400 font-mono">$</span>
+                      <span className="transform transition-all duration-300 hover:scale-110">{cmd.icon}</span>
+                      <span className="text-gray-300">{cmd.text}</span>
+                      <span className="text-green-400 ml-auto">✓</span>
                     </div>
                   ))}
                 </div>
               </>
             )}
           </div>
-        </div>
-
-        {showResume && (
-          <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50">
-            <div className="terminal-window w-full max-w-5xl mx-4">
-              <div className="terminal-header">
-                <div className="terminal-button red" onClick={() => {
-                  setShowResume(false);
-                  setResumeLoading(0);
-                  setIsDecrypted(false);
-                }}></div>
-                <div className="terminal-button yellow"></div>
-                <div className="terminal-button green"></div>
-                <span className="ml-4 text-green-400 text-sm">decrypt-resume.exe</span>
-              </div>
-              
-              <div className="p-6 bg-gray-900">
-                {!isDecrypted ? (
-                  <div className="text-center space-y-6 p-8">
-                    <h3 className="text-2xl text-green-400 font-mono mb-8">
-                      {resumeLoading < 100 ? 'Decrypting Resume...' : 'Decryption Complete!'}
-                    </h3>
-                    <div className="w-full bg-gray-800 rounded-full h-4 relative overflow-hidden border border-green-500/30">
-                      <div
-                        className="h-full rounded-full transition-all duration-300 relative overflow-hidden"
-                        style={{
-                          width: `${resumeLoading}%`,
-                          background: 'linear-gradient(90deg, #059669, #10B981)'
-                        }}
-                      >
-                        <div 
-                          className="absolute inset-0 opacity-75"
-                          style={{
-                            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
-                            animation: 'shine 1.5s infinite'
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex justify-between text-sm text-green-400 font-mono">
-                      <span>Progress: {resumeLoading}%</span>
-                      <span>{resumeLoading < 100 ? 'Decrypting...' : 'Complete!'}</span>
-                    </div>
-                    <div className="mt-8 flex justify-center space-x-4">
-                      {Array(5).fill(null).map((_, i) => (
-                        <span 
-                          key={i} 
-                          className="text-2xl animate-bounce" 
-                          style={{ 
-                            animationDelay: `${i * 200}ms`,
-                            opacity: resumeLoading < 20 * (i + 1) ? 0.3 : 1 
-                          }}
-                        >
-                          {resumeLoading < 100 ? '⚡' : '🎉'}
-                        </span>
-                      ))}
-                    </div>
-                    {resumeLoading === 100 && (
-                      <div className="mt-8 animate-fade-in">
-                        <p className="text-green-400 mb-4">Access Granted! Opening secure document...</p>
-                        <div className="loading-dots">
-                          <span className="dot"></span>
-                          <span className="dot"></span>
-                          <span className="dot"></span>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <div className="h-[80vh] bg-white rounded-lg shadow-2xl overflow-hidden transform animate-scale-up">
-                    <iframe
-                      src={resumePdf}
-                      className="w-full h-full"
-                      style={{
-                        border: 'none',
-                        background: 'white'
-                      }}
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
+        </div>        <ResumeViewer 
+          isOpen={showResume} 
+          onClose={() => {
+            setShowResume(false);
+            setIsResumeButtonLoading(false);
+          }} 
+        />
 
         <div 
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer hover:opacity-80 transition-opacity"
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer group"
           onClick={() => document.getElementById('about').scrollIntoView({ behavior: 'smooth' })}
           role="button"
           aria-label="Scroll to explore content"
         >
-          <div className="scroll-indicator flex flex-col items-center">
-            <span className="text-green-400 text-3xl animate-bounce mb-1">⌄</span>
-            <p className="text-sm text-green-400 hover:text-green-300 transition-colors">Scroll to explore</p>
+          <div className="explore-more-container">
+            <div className="explore-more-icon">
+              <div className="chevron"></div>
+              <div className="chevron"></div>
+              <div className="chevron"></div>
+            </div>
+            <div className="explore-more-text-wrapper">
+              <span className="explore-more-text-main">Explore More</span>
+              <span className="explore-more-text-sub">Scroll to discover</span>
+            </div>
           </div>
         </div>
       </div>

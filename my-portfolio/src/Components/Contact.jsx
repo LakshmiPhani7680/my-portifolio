@@ -44,9 +44,9 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-16 terminal-section">
-      <div className="max-w-7xl mx-auto px-6">
-        <h2 className="section-title code-syntax">
+    <section id="contact" className="py-20 terminal-section">
+      <div className="max-w-7xl mx-auto px-8">
+        <h2 className="section-title code-syntax mb-8">
           initialize-contact-form
         </h2>
 
@@ -58,18 +58,19 @@ const Contact = () => {
             <span className="ml-4 text-green-400 text-sm">contact.exe</span>
           </div>
           
-          <div className="p-6">
-            <div className="code-block mb-8">
+          <div className="p-8">
+            <div className="code-block mb-10 p-6 bg-gray-900/50">
               <span className="code-keyword">const</span>{" "}
               <span className="skill-emphasis">contactMethods</span> = {"{"}
-              <div className="grid md:grid-cols-2 gap-6 mt-4">
-                <div className="terminal-card p-6 border border-green-400 rounded-md transform hover:scale-102 transition-all duration-300">
-                  <h3 className="text-xl text-green-300 font-mono mb-4 flex items-center">
+              <div className="grid md:grid-cols-2 gap-8 mt-6">
+                <div className="terminal-card p-8 border border-green-400 rounded-md transform hover:scale-102 transition-all duration-300">
+                  <h3 className="text-xl text-green-300 font-mono mb-6 flex items-center">
                     <span className="text-2xl mr-3">📧</span>
                     Direct Contact
                   </h3>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-2 group">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3 group">
+                      <span className="text-xl">✉️</span>
                       <span className="code-param">email</span>:{" "}
                       <a 
                         href={`mailto:${contactInfo.email}`} 
@@ -79,20 +80,25 @@ const Contact = () => {
                         <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
                       </a>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-3">
+                      <span className="text-xl">📍</span>
                       <span className="code-param">location</span>:{" "}
-                      <span className="text-gray-300">{contactInfo.location}</span>
+                      <span className="text-gray-300 flex items-center gap-2">
+                        {contactInfo.location}
+                        <span className="text-sm">🏢</span>
+                      </span>
                     </div>
                   </div>
                 </div>
 
-                <div className="terminal-card p-6 border border-green-400 rounded-md transform hover:scale-102 transition-all duration-300">
-                  <h3 className="text-xl text-green-300 font-mono mb-4 flex items-center">
+                <div className="terminal-card p-8 border border-green-400 rounded-md transform hover:scale-102 transition-all duration-300">
+                  <h3 className="text-xl text-green-300 font-mono mb-6 flex items-center">
                     <span className="text-2xl mr-3">🔗</span>
                     Professional Networks
                   </h3>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-2 group">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3 group">
+                      <span className="text-xl">⭐</span>
                       <span className="code-param">github</span>:{" "}
                       <a 
                         href={contactInfo.github} 
@@ -100,11 +106,15 @@ const Contact = () => {
                         rel="noopener noreferrer" 
                         className="text-green-300 hover:text-green-200 transition-colors duration-300 group-hover:translate-x-1 inline-flex items-center"
                       >
-                        GitHub Profile
+                        <span className="flex items-center gap-2">
+                          <span className="text-xl">📦</span>
+                          GitHub Profile
+                        </span>
                         <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
                       </a>
                     </div>
-                    <div className="flex items-center gap-2 group">
+                    <div className="flex items-center gap-3 group">
+                      <span className="text-xl">💼</span>
                       <span className="code-param">linkedin</span>:{" "}
                       <a 
                         href={contactInfo.linkedin} 
@@ -112,7 +122,10 @@ const Contact = () => {
                         rel="noopener noreferrer" 
                         className="text-green-300 hover:text-green-200 transition-colors duration-300 group-hover:translate-x-1 inline-flex items-center"
                       >
-                        LinkedIn Profile
+                        <span className="flex items-center gap-2">
+                          <span className="text-xl">👔</span>
+                          LinkedIn Profile
+                        </span>
                         <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
                       </a>
                     </div>
@@ -122,10 +135,10 @@ const Contact = () => {
               {"}"}
             </div>
 
-            <div className="code-block relative">
+            <div className="code-block relative p-6">
               <span className="code-keyword">function</span>{" "}
               <span className="code-function">sendMessage</span>() {"{"}
-              <form onSubmit={handleSubmit} className="mt-4 space-y-6 relative">
+              <form onSubmit={handleSubmit} className="mt-6 space-y-8 relative">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="relative group">
                     <label className="block text-green-300 mb-2 group-hover:translate-x-1 transition-transform duration-300">
@@ -246,7 +259,7 @@ const Contact = () => {
               {"}"}
             </div>
 
-            <div className="mt-8 space-y-4">
+            <div className="mt-10 space-y-4 px-2">
               <p className="key-point">
                 <span className="code-comment">{"/* "}</span>
                 Available for exciting opportunities and collaborations

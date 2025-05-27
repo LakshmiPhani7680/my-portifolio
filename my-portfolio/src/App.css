@@ -1,0 +1,474 @@
+/* Animated Wave Effect */
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(20deg); }
+  75% { transform: rotate(-15deg); }
+}
+
+.animate-wave {
+  animation: wave 1.5s infinite;
+  display: inline-block;
+  transform-origin: 70% 70%;
+}
+
+/* Typewriter effect for skills */
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid #10B981;
+  white-space: nowrap;
+  animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #10B981 }
+}
+
+/* Shine animation for loading bars */
+@keyframes shine {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* Terminal status indicator pulse */
+@keyframes statusPulse {
+  0% { transform: scale(0.95); opacity: 0.5; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.5; }
+}
+
+.animate-status-pulse {
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+/* Hover effects for command items */
+.command-item {
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.command-item:hover {
+  transform: translateX(10px);
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: 4px;
+}
+
+.command-item:hover .text-green-400 {
+  text-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+}
+
+/* Button hover effects */
+.code-button.with-icon:hover .button-icon {
+  animation: iconBounce 0.5s ease;
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px) rotate(12deg); }
+}
+
+/* Background gradient animation */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.matrix-bg {
+  position: relative;
+  background-color: #000;
+  overflow: hidden;
+  background: linear-gradient(
+    45deg, 
+    rgba(0,0,0,0.95) 0%,
+    rgba(16, 185, 129, 0.05) 50%,
+    rgba(0,0,0,0.95) 100%
+  );
+  background-size: 200% 200%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Circuit Board Background Animation */
+.matrix-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(to right, #10B98108 1px, transparent 1px),
+    linear-gradient(to bottom, #10B98108 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, #10B98105 0, transparent 8px);
+  background-size: 50px 50px, 50px 50px, 200px 200px;
+  animation: circuitAnimation 15s linear infinite;
+  z-index: 0;
+}
+
+.matrix-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(16, 185, 129, 0.03) 0%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+  z-index: 1;
+}
+
+@keyframes circuitAnimation {
+  0% {
+    background-position: 0 0, 0 0, 0 0;
+  }
+  100% {
+    background-position: 100px 0, 0 100px, 100px 100px;
+  }
+}
+
+/* Glowing dots effect */
+.circuit-dot {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #10B981;
+  border-radius: 50%;
+  filter: blur(1px);
+  opacity: 0;
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+/* Enhanced Explore More Styling */
+.explore-more-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
+.explore-more-container:hover {
+  transform: translateY(-4px);
+}
+
+.explore-more-icon {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.chevron {
+  position: absolute;
+  width: 28px;
+  height: 8px;
+  opacity: 0;
+  transform: scale3d(0.5, 0.5, 0.5);
+  animation: move 3s ease-out infinite;
+  left: 6px;
+}
+
+.chevron:first-child {
+  animation: move 3s ease-out 1s infinite;
+}
+
+.chevron:nth-child(2) {
+  animation: move 3s ease-out 2s infinite;
+}
+
+.chevron:before,
+.chevron:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 51%;
+  background: #10B981;
+  transition: background 0.3s ease;
+}
+
+.chevron:before {
+  left: 0;
+  transform: skewY(30deg);
+}
+
+.chevron:after {
+  right: 0;
+  width: 50%;
+  transform: skewY(-30deg);
+}
+
+.explore-more-container:hover .chevron:before,
+.explore-more-container:hover .chevron:after {
+  background: #059669;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+.explore-more-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.explore-more-text-main {
+  font-size: 1rem;
+  color: #10B981;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.explore-more-text-sub {
+  font-size: 0.75rem;
+  color: #10B981;
+  opacity: 0.8;
+}
+
+.explore-more-container:hover .explore-more-text-wrapper {
+  opacity: 1;
+}
+
+@keyframes move {
+  25% {
+    opacity: 1;
+    transform: translate3d(0, 20px, 0) scale3d(0.8, 0.8, 1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translate3d(0, 40px, 0) scale3d(0.65, 0.65, 1);
+  }
+  75% {
+    opacity: 0.25;
+    transform: translate3d(0, 60px, 0) scale3d(0.5, 0.5, 1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 80px, 0) scale3d(0.35, 0.35, 1);
+  }
+}
+
+/* Enhanced Resume Button Loading Animation */
+.code-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.code-button:disabled {
+  opacity: 0.8;
+  cursor: wait;
+}
+
+.code-button .animate-bounce {
+  animation: loadingBounce 0.6s infinite;
+}
+
+@keyframes loadingBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Loading dots container */
+.loading-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.loading-dots .dot {
+  width: 8px;
+  height: 8px;
+  background: #10B981;
+  border-radius: 50%;
+  animation: pulse 1s infinite;
+}
+
+.loading-dots .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dots .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+}
+
+/* Button content slide animation */
+.button-content-slide {
+  transition: transform 0.3s ease;
+}
+
+.button-content-slide.loading {
+  transform: translateY(-100%);
+}
+
+/* Resume Viewer Animations */
+.animate-scale-up {
+  animation: scaleUp 0.3s ease forwards;
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Button Loading Animation */
+.button-loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.button-loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(16, 185, 129, 0.2),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Terminal Window Animations */
+.terminal-window {
+  animation: slideInUp 0.3s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Modal positioning */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal-content {
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  margin: 2rem;
+  position: relative;
+}
+
+/* Prevent background scroll when modal is open */
+body.modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/* Firework Animations */
+.particle {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: #10B981;
+  border-radius: 50%;
+  animation: firework-particle 1s ease-out forwards;
+  opacity: 0;
+  transform-origin: center center;
+}
+
+.firework-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+}
+
+.firework-left {
+  left: -60px;
+}
+
+.firework-right {
+  right: -60px;
+}
+
+@keyframes firework-particle {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+    background: #10B981;
+  }
+  50% {
+    opacity: 0.8;
+    background: #059669;
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) scale(0);
+    opacity: 0;
+    background: #047857;
+  }
+}
