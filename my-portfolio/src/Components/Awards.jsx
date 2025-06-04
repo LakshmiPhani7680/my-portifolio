@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import insta_award from '../assets/awards/Phani_INSTA_AWARDS.png'; // Ensure this path is correct
 // Firework Effect Component
 const FireworkEffect = ({ side }) => {
   const [particles, setParticles] = useState([]);
@@ -45,20 +45,21 @@ const Awards = () => {
   const [showImage, setShowImage] = useState(false);
 
   const awards = [
-    {      title: "Insta Award",
+    {
+      title: "Insta Award",
       organization: "Infosys",
       year: "2023",
       description: "Awarded a Certificate of Appreciation for independently leading the VLL Platform deployment in a new cloud environment for the Enterprise Metaverse project, demonstrating exceptional dedication and technical expertise.",
       category: "professional",
-      image: "../assets/awards/Phani_INSTA_AWARDS.png"
+      image: insta_award
     },
     {
       title: "Outstanding Performance",
       organization: "Infosys",
       year: "2022-2024",
       description: "Awarded for exceptional contribution to critical project deliveries and mentoring team members",
-      category: "professional",
-      image: "/awards/outstanding-performance.png" // You'll need to add these images to your public folder
+      category: "professional"
+      // No image property
     }
   ];
   const openModal = (award) => {

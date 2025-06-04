@@ -1,4 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import React_cert_infosys from '../assets/certs/Infosys_React.png';
+import Infosys_JavaScript from '../assets/certs/Infosys_JavaScript.png';
+import ReactJS_NSDC from '../assets/certs/ReactJS_NSDC.png';
+import SI_MongoDB from '../assets/certs/SI_MongoDB.jpeg'; // Assuming you have this image
+import Az900 from '../assets/certs/AZ900.png'; // Assuming you have this image
 
 const Certifications = () => {
   const [selectedCert, setSelectedCert] = useState(null);
@@ -12,7 +17,8 @@ const Certifications = () => {
       issuer: "Internshaala",
       date: "2024",
       credentials: "ey6gk6107hb36tgw",
-      skills: ["React", "JavaScript", "Tailwind CSS"],      image: "/src/assets/certs/ReactJS_NSDC.png",
+      skills: ["React", "JavaScript", "Tailwind CSS"],      
+      image: ReactJS_NSDC,
       level: "Basic - Advanced"
     },
     {
@@ -21,7 +27,7 @@ const Certifications = () => {
       date: "2024",
       credentials: "INFOSYS-REACT-2024",
       skills: ["React", "Routers", "React Hooks"],
-      image: "/src/assets/certs/Infosys_React.png",
+      image: React_cert_infosys,
       level: "Basic - Advanced"
     },
     {
@@ -30,9 +36,27 @@ const Certifications = () => {
       date: "2024",
       credentials: "INFOSYS-JS-2024",
       skills: ["JavaScript", "ES6", "DOM Manipulation"],
-      image: "/src/assets/certs/Infosys_JavaScript.png",
+      image: Infosys_JavaScript,
       level: "Expert"
-    }
+    },
+    {
+      name: "SI Associate - MongoDB",
+      issuer: "MongoDB",
+      date: "2024",
+      credentials: "MDB66l3wo52xf",
+      skills: ["MongoDB Basics"],      
+      image: SI_MongoDB,
+      level: "Basic"
+    },
+    {
+      name: "AZ900 - Microsoft Azure Fundamentals",
+      issuer: "Microsoft",
+      date: "2024",
+      credentials: "EF3A12B2E2AF645",
+      skills: ["Azure Fundamentals", "Cloud Concepts", "Core Azure Services"],      
+      image: Az900,
+      level: "Basic"
+    },
   ];
 
   // Update the useEffect for loading animation
