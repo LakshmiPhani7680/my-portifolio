@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import TaskMate from '../assets/projects/TaskMate.png';
 import MyPortifolio from '../assets/projects/MyPortifolio.png';
+import GreenBasket from '../assets/projects/GreenBasket.png';
+import APIBackend from '../assets/projects/APIBackend.png';
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState('all');
 
@@ -17,8 +19,8 @@ const Projects = () => {
     "Admin Dashboard to manage products and review customer orders",
     "Future-ready for integration with MongoDB, authentication, and payment gateways",
   ],
-        link: "https://github.com/yourusername/ecommerce",
-        image: ""
+        link: "https://github.com/LakshmiPhani7680/greenbasket",
+        image: GreenBasket
       },
     ],
     frontend: [
@@ -30,34 +32,37 @@ const Projects = () => {
           "Add and manage tasks",
           "Theme customization",
         ],
-        link: "https://github.com/yourusername/task-manager",
+        link: "https://github.com/LakshmiPhani7680/taskmate_real",
         image: TaskMate
       },
       {
-        title: "Portfolio Website",
+        title: "my-portifolio - Interactive Developer Portfolio",
         description: "Personal portfolio website with terminal-style UI and animations",
-        technologies: ["React", "Tailwind CSS", "Framer Motion"],
+        technologies: ["React", "Tailwind CSS", "Framer Motion", "JavaScript","CSS"],
         highlights: [
           "Custom terminal-style interface",
           "Responsive design",
           "Performance optimized"
         ],
-        link: "https://github.com/yourusername/portfolio",
+        link: "https://github.com/LakshmiPhani7680/my-portifolio.git",
         image: MyPortifolio
       }
     ],
     backend: [
       {
         title: "API Gateway Service",
-        description: "Developed a microservice API gateway with rate limiting and caching",
-        technologies: ["Node.js", "Express", "Redis", "Docker"],
+        description: "Developed a microservice API gateway with rate limiting and logging",
+        technologies: ["Python", "FastAPI", "Redis", "logger", "Pyjwt"],
         highlights: [
           "Implemented rate limiting",
-          "Cache optimization",
-          "Load balancing"
+          "JWT Authentication",
+          "Centralized logging",
+          "Microservice architecture (User+Product services)",
+          "Asynchronous HTTP forwarding",
+          "Still Developing more....."
         ],
-        link: "https://github.com/yourusername/api-gateway",
-        image: ""
+        link: "https://github.com/LakshmiPhani7680/ApiGateWayService",
+        image: APIBackend
       }
     ]
   };
