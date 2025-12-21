@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Btech_OD from '../assets/certs/Edu/Btech_OD.png';
+
 const Education = () => {
   const education = [
     {
