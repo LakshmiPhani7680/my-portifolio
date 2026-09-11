@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import resumePdf from '../assets/pdfs/Resume_Putrevu.pdf';
+import resumePdf from '../assets/pdfs/Resume_Putrevu_5yrs.pdf';
 
 const ResumeViewer = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(0);
